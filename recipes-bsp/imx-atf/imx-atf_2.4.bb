@@ -5,12 +5,14 @@ SECTION = "BSP"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/BSD-3-Clause;md5=550794465ba0ec5312d6919e203a55f9"
 
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
+
 PV .= "+git${SRCPV}"
 
 SRCBRANCH = "lf_v2.4"
 SRC_URI = "git://source.codeaurora.org/external/imx/imx-atf.git;protocol=https;branch=${SRCBRANCH} \
-"
-SRCREV = "5782363f92a2fdf926784449270433cf3ddf44bd"
+           file://0001-Makefile-Suppress-array-bounds-error.patch"
+SRCREV = "05f788b9bbb13d002997e35008a4b945f7e2957b"
 
 S = "${WORKDIR}/git"
 
@@ -59,9 +61,9 @@ do_compile() {
 do_install[noexec] = "1"
 
 do_deploy() {
-    install -Dm 0644 ${S}/build/${ATF_PLATFORM}/release/bl31.bin ${DEPLOYDIR}/${BOOT_TOOLS}/bl31-${ATF_PLATFORM}.bin
+    install -Dm 0644 ${S}/build/${ATF_PLATFORM}/release/bl31.bin ${DEPLOYDIR}/bl31-${ATF_PLATFORM}.bin
     if ${BUILD_OPTEE}; then
-       install -m 0644 ${S}/build-optee/${ATF_PLATFORM}/release/bl31.bin ${DEPLOYDIR}/${BOOT_TOOLS}/bl31-${ATF_PLATFORM}.bin-optee
+       install -m 0644 ${S}/build-optee/${ATF_PLATFORM}/release/bl31.bin ${DEPLOYDIR}/bl31-${ATF_PLATFORM}.bin-optee
     fi
 }
 addtask deploy after do_compile
