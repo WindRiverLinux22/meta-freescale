@@ -47,6 +47,10 @@ do_install:append(){
         fi
     done
     cp -rf ${S}/nxp/* ${D}/${INSTALL_PATH}/
+
+    if [ ! -x ${D}/${INSTALL_PATH}/dpaa2/dynamic_dpl.sh ];then
+	chmod +x ${D}/${INSTALL_PATH}/dpaa2/dynamic_dpl.sh
+    fi
 }
 
 PACKAGES =+ "${PN}-tools ${PN}-examples ${PN}-misc"
