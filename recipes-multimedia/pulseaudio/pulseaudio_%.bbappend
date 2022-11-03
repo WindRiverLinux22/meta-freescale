@@ -3,7 +3,6 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}/imx-nxp-bsp:"
 SRC_URI += "${SRC_URI_IMX}"
 SRC_URI_IMX             = ""
 SRC_URI_IMX:mx6-nxp-bsp = " \
-    file://0001-Fix-pulseaudio-mutex-issue-when-do-pause-in-gstreame.patch \
     file://daemon.conf \
     file://default.pa"
 SRC_URI_IMX:mx7-nxp-bsp = " \
